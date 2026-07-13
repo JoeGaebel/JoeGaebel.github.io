@@ -14,10 +14,10 @@ const optimizedHero = await getImage({src: heroImage, width: 512, height: 512, f
 <BaseLayout preloadImage={optimizedHero.src}>
     <div class="min-[1024px]:max-w-[960px] min-[1216px]:max-w-[1152px] min-[1408px]:max-w-[1200px] mx-auto">
         <HeaderSection />
-        <VolunteeringSection />
-        <ExperienceSection />
-        <ReviewsSection />
-        <EducationSection />
-        <ContactSection />
+        <div class="reveal reveal-1"><VolunteeringSection /></div>
+        <div class="reveal reveal-2"><ExperienceSection /></div>
+        <div class="reveal reveal-3"><ReviewsSection /></div>
+        <div class="reveal reveal-4"><EducationSection /></div>
+        <div class="reveal reveal-5"><ContactSection /></div>
     </div>
 </BaseLayout>
