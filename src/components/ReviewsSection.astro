@@ -181,7 +181,7 @@ const items: ReviewItem[] = [
 ---
 <Section id="reviews" style="margin-top: -10rem">
     <SectionHeader>Reviews</SectionHeader>
-    <ReviewsList client:visible heightOverride="50rem">
+    <ReviewsList client:visible>
         <div class="flex flex-wrap -mx-3">
         {items.map(item => {
             if (item.type === "label") {

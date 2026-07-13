@@ -6,13 +6,19 @@ import atlassian from "../../assets/logos/atlassian.png"
 const principles = ["Extreme Programming", "Lean Software Engineering", "Lean Product Management", "Test-First Programming", "Pair Programming", "Continuous Integration", "Continuous Deployment & Delivery"]
 const technologies = ["Spring Boot", "Google Guice", "AWS SQS", "PostgreSQL", "Bitbucket Pipelines"]
 const testingTech = ["JUnit 5", "Mockito"]
+
+// Tenure at Atlassian, calculated in 0.5 year increments (rounded to nearest) from the May 2023 start date.
+const start = new Date(2023, 4, 1)
+const now = new Date()
+const months = (now.getFullYear() - start.getFullYear()) * 12 + (now.getMonth() - start.getMonth())
+const years = `${Math.round(months / 6) / 2} yrs`
 ---
 <WorkExperience
     companyName="Atlassian"
     city="Sydney, Australia"
-    titles={["Senior Software Engineer", "Software Engineer"]}
-    dateString={["September 2024 to present", "May 2023 to September 2024"]}
-    years="2.5 yrs"
+    titles={["Senior Software Engineer"]}
+    dateString={["May 2023 to present"]}
+    years={years}
     imageContainerMarginRight="-1.5rem"
 >
     <Image slot="image" style="width: 68px; margin-top: -0.7rem; margin-right: 2rem; margin-bottom: 1rem; margin-left: 0rem" src={atlassian} alt="Atlassian logo" width={136} height={136} />
