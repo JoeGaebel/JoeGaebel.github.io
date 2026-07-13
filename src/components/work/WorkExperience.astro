@@ -6,10 +6,11 @@ interface Props {
     dateString: string[]
     description?: string
     years?: number | string
+    yearsId?: string
     imageContainerMarginRight?: string
 }
 
-const {companyName, city, titles, dateString, years, imageContainerMarginRight} = Astro.props
+const {companyName, city, titles, dateString, years, yearsId, imageContainerMarginRight} = Astro.props
 
 let yearString: string | undefined
 if (years && typeof years === "string") {
@@ -30,7 +31,7 @@ const containerStyle = imageContainerMarginRight ? `margin-right: ${imageContain
                 <div class="lg:flex">
                     <div class="flex flex-nowrap">
                         <div class="text-[1.5rem] font-header font-semibold">{companyName}</div>
-                        {years && <div class="ml-2 font-light text-grey text-[1rem] font-header" style="margin-top: 0.5rem">
+                        {years && <div id={yearsId} class="ml-2 font-light text-grey text-[1rem] font-header" style="margin-top: 0.5rem">
                             {yearString}
                         </div>}
                     </div>
