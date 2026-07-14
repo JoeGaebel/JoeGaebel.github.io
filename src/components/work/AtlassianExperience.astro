@@ -2,16 +2,16 @@
 import {Image} from "astro:assets"
 import WorkExperience from "./WorkExperience.astro"
 import atlassian from "../../assets/logos/atlassian.png"
+import {tenureYears, ATLASSIAN_START} from "../../utils/tenure"
 
 const principles = ["Extreme Programming", "Lean Software Engineering", "Lean Product Management", "Test-First Programming", "Pair Programming", "Continuous Integration", "Continuous Deployment & Delivery"]
 const technologies = ["Spring Boot", "Google Guice", "AWS SQS", "PostgreSQL", "Bitbucket Pipelines"]
 const testingTech = ["JUnit 5", "Mockito"]
 
-// Tenure at Atlassian, calculated in 0.5 year increments (rounded to nearest) from the May 2023 start date.
-const start = new Date(2023, 4, 1)
-const now = new Date()
-const months = (now.getFullYear() - start.getFullYear()) * 12 + (now.getMonth() - start.getMonth())
-const years = `${Math.round(months / 6) / 2} yrs`
+// Tenure at Atlassian, in 0.5 year increments (rounded to nearest) from the May
+// 2023 start date. Rendered at build time, then recalculated on the client (see
+// script below) so it stays current without needing a redeploy.
+const years = tenureYears(ATLASSIAN_START.year, ATLASSIAN_START.monthIndex)
 ---
 <WorkExperience
     companyName="Atlassian"
@@ -19,6 +19,7 @@ const years = `${Math.round(months / 6) / 2} yrs`
     titles={["Senior Software Engineer"]}
     dateString={["May 2023 to present"]}
     years={years}
+    yearsId="atlassian-tenure"
     imageContainerMarginRight="-1.5rem"
 >
     <Image slot="image" style="width: 68px; margin-top: -0.7rem; margin-right: 2rem; margin-bottom: 1rem; margin-left: 0rem" src={atlassian} alt="Atlassian logo" width={136} height={136} />
@@ -34,3 +35,11 @@ const years = `${Math.round(months / 6) / 2} yrs`
         <div class="mb-3">{testingTech.map(k => <span class="tag tag-success-light mr-1 mt-1 text-[1rem]">{k}</span>)}</div>
     </Fragment>
 </WorkExperience>
+<script>
+    import {tenureYears, ATLASSIAN_START} from "../../utils/tenure"
+
+    // Recalculate tenure in the browser so it reflects the current date rather
+    // than the build date — keeps "X yrs" fresh without a redeploy.
+    const el = document.getElementById("atlassian-tenure")
+    if (el) el.textContent = tenureYears(ATLASSIAN_START.year, ATLASSIAN_START.monthIndex)
+</script>
